@@ -4,15 +4,15 @@ ARG SYNAPPS_VERSION
 FROM lnls/epics-synapps:${BASE_VERSION}-${SYNAPPS_VERSION}-${DEBIAN_VERSION}
 
 ARG BASE_VERSION
-ARG IOC_COMMIT
 ARG DEBIAN_VERSION
+ARG IOC_COMMIT
 ARG IOC_GROUP
 ARG IOC_REPO
 ARG SYNAPPS_VERSION
 
 ENV BOOT_DIR iocScreen
 
-RUN git clone https://github.com/lnls-dig/${IOC_REPO}.git /opt/epics/${IOC_REPO} && \
+RUN git clone https://github.com/${IOC_GROUP}/${IOC_REPO}.git /opt/epics/${IOC_REPO} && \
     ln --verbose --symbolic $(ls --directory /opt/epics/synApps*) /opt/epics/synApps &&\
     cd /opt/epics/${IOC_REPO} && \
     git checkout ${IOC_COMMIT} && \
